@@ -7,30 +7,17 @@ class Solution
 {
     public:
     
-      long long int fun(long long int i)
-      {
-          long long int sum = 0;
-            while(i!=0)
-            {
-               sum += i%10;
-               i = i/10;
-            }
-            return sum;
-      }
+
     
         long long int numberCount(long long int N, long long int K)
         {
-            // your code here
-            long long int cnt = 0;
-            
-            for(int i=1;i<=N;i++)
+                double x=(double)K/9; 
+                int a=N-(ceil(x)*10)+1;
+            if(a>=0)
             {
-              long long int sum = fun(i);
-              if(i-sum >= K)
-              cnt++;
+                return a;
             }
-            
-            return cnt;
+            return 0;
         }
 };
 
