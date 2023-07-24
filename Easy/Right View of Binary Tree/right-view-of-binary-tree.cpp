@@ -40,32 +40,38 @@ struct Node
 class Solution
 {
     public:
+    void hig(Node* root,int &h, int p)
+    {
+        if(root == NULL)
+        return;
+        
+        h = max(h,p);
+        hig(root->left,h,p+1);
+        hig(root->right,h,p+1);
+    }
+    void fun(Node* root, vector<int> &ans,int t)
+    {
+        if(root == NULL)
+        return;
+        
+        ans[t] = root->data;
+        fun(root->left,ans,t+1);
+        fun(root->right,ans,t+1);
+    }
     
     //Function to return list containing elements of right view of binary tree.
     vector<int> rightView(Node *root)
     {
-        vector<int> ans;
-        queue<Node*> q;
-        q.push(root);
-        while(!q.empty())
-        {
-            int n = q.size();
-            for(int i=0;i<n;i++)
-            {
-                Node* temp = q.front();
-                q.pop();
-                if(i == n-1)
-                ans.push_back(temp->data);
-                
-                if(temp->left != NULL)
-                q.push(temp->left);
-                if(temp->right != NULL)
-                q.push(temp->right);
-            }
-        }
+        int t = 0;
+        int h = 0;
+        int p = 0;
+        hig(root,h,p);
+        vector<int> ans(h+1);
+       fun(root,ans,t);
        return ans;
     }
 };
+
 
 
 
