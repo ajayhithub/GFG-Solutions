@@ -24,7 +24,7 @@ class Solution {
         fun(K,N,ans,arr,i+1,sum);
         sum -= i;
         arr.pop_back();
-       // if(i<=9)
+
         fun(K,N,ans,arr,i+1,sum);
     
     }
