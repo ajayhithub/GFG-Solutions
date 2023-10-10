@@ -10,27 +10,27 @@ class Solution{
 public:	
 	// calculate the maximum sum with out adjacent
 	
-	int fun(int *arr, int n,vector<int> &dp)
+	int fun(vector<int>&arr, int i,vector<int> &dp)
 	{
-	    if(n==0)
-	    return arr[n];
-	    if(n<0)
+	    if(i==0)
+	    return arr[i];
+	    if(i<0)
 	    return 0;
-	    if(dp[n]!=-1)
-	    return dp[n];
+	    if(dp[i]!=-1)
+	    return dp[i];
 	    
-	    int add = arr[n]+fun(arr,n-2,dp);
-	    int notadd = fun(arr,n-1,dp);
+	   
+	    int l = arr[i] + fun(arr,i-2,dp);
+	    int r = fun(arr,i-1,dp);
 	    
-	    dp[n] = max(add,notadd);
-	    return dp[n];
-
-     }
+	    dp[i] = max(l,r);
+	    return max(l,r);
+	}
 	
-	int findMaxSum(int *arr, int n) {
+	int findMaxSum(vector<int>&arr, int n) {
 	    // code here
 	    vector<int> dp(n,-1);
-	   return fun(arr,n-1,dp);
+	    return fun(arr,n-1,dp);
 	}
 };
 
@@ -42,7 +42,7 @@ int main() {
     while (t--) {
         int n;
         cin >> n;
-        int arr[n];
+        vector<int>arr(n);
         for (int i = 0; i < n; i++) {
             cin >> arr[i];
         }
