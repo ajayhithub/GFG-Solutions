@@ -10,10 +10,9 @@ using namespace std;
 class Solution{
 public:
 
-  int fun(int N, int A[], int cnt, int i,int pic)
+  int fun(int N, int A[], int i,int pic)
   {
-     if(i>=N)
-     return cnt;
+     if(i>=N) return 1;
      
      int l = INT_MIN, r = INT_MIN;
        
@@ -21,14 +20,14 @@ public:
       if(abs(A[pic]-A[i]) == 1)
       {
          // cout<<A[i]<<"A"<<cnt<<" ";
-          l = fun(N,A,cnt+1,i+1,i);
+          l = fun(N,A,i+1,i)+1;
       }
       if(i==pic)
       {
-          r=max(fun(N,A,cnt,i+1,pic+1),fun(N,A,cnt,i+1,pic));
+          r=max(fun(N,A,i+1,pic+1),fun(N,A,i+1,pic));
       }
       else{
-          r=fun(N,A,cnt,i+1,pic);
+          r=fun(N,A,i+1,pic);
       }
      
      
@@ -38,9 +37,7 @@ public:
     int longestSubsequence(int N, int A[])
     {
         // code here
-        int cnt = 1; 
-        
-       return fun(N,A,cnt,0,0);
+       return fun(N,A,0,0);
     }
 };
 
