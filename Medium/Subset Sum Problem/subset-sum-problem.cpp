@@ -14,7 +14,7 @@ bool fun(vector<int>arr, int sum, int i,int n, vector<vector<int>> &dp)
 {
     if(sum == 0)
     return true;
-     if(sum < 0)
+    if(sum < 0)
     return false;
     if(i>=n)
     return false;
@@ -28,10 +28,39 @@ bool fun(vector<int>arr, int sum, int i,int n, vector<vector<int>> &dp)
     return (l||r);
 }
 
+   bool fun1(vector<int>arr, int sum)
+   { 
+       int n = arr.size();
+      vector<vector<bool>> dp(n,vector<bool>(sum+1,0));
+     
+      for(int i=0;i<n;i++)
+       dp[i][0] = true;
+      
+      dp[0][arr[0]] = true;
+      
+      for(int i=1;i<n;i++)
+      {
+         for(int t=1;t<=sum;t++) 
+         {
+             bool no = dp[i-1][t];
+             bool tak = false;
+             if(arr[i]<=t)
+             tak = dp[i-1][t-arr[i]];
+             
+             dp[i][t] = tak||no;
+         }
+      }
+     
+     return dp[n-1][sum];
+   }
+
     bool isSubsetSum(vector<int>arr, int sum){
         // code here 
-        vector<vector<int>> dp(arr.size(),vector<int>(sum+1,-1));
-        return fun(arr,sum,0,arr.size(),dp);
+      //  vector<vector<int>> dp(arr.size(),vector<int>(sum+1,-1));
+     // return   fun(arr,sum,0,arr.size(),dp);      
+        
+        
+        return fun1(arr,sum);
     }
 };
 
