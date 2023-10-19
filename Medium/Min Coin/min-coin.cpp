@@ -8,8 +8,8 @@ class Solution{
 	
 	int fun(vector<int>nums, int amount,int i,vector<vector<int>> &dp)
 	{
-	    if(amount==0)
-	    return 0;
+	   // if(amount==0)
+	   // return 0;
 	    if(i==0)
 	    {
 	       if(amount%nums[0]==0)
@@ -31,16 +31,51 @@ class Solution{
 	    return min(l,r);
 	}
 	
+		int fun1(vector<int>nums, int amount)
+		{
+		    vector<vector<int>> dp(nums.size()+1,vector<int>(amount+1,1e7));
+		   
+		   for(int t=0;t<=amount;t++)
+		   {
+              if(t%nums[0]==0)
+	          dp[0][t] = t/nums[0];
+		   }
+
+		    int n = nums.size();
+		    for(int i=1;i<n;i++)
+		    {
+		        for(int t=0;t<=amount;t++)
+		        {
+		            int non = dp[i-1][t];
+		            int tak = 1e7;
+		            if(nums[i]<=t)
+		            tak = 1 + dp[i][t-nums[i]];
+		            
+		            dp[i][t] = min(non,tak);
+		          //  cout<<dp[i][t]<<" ";
+		        }
+		    //    cout<<endl;
+		    }
+		    
+		    if(dp[n-1][amount] >= 1e7)
+		    return -1;
+		    
+		    
+		   return dp[n-1][amount]; 
+		   
+		}
+	
 	int MinCoin(vector<int>nums, int amount)
 	{
 	    // Code here
-	    vector<vector<int>> dp(nums.size()+1,vector<int>(amount+1,-1));
-	    int ans = fun(nums,amount,nums.size()-1,dp);
-	    if(ans>=1e7)
-	    return -1;
+	   // vector<vector<int>> dp(nums.size()+1,vector<int>(amount+1,-1));
+	   // int ans = fun(nums,amount,nums.size()-1,dp);
+	   // if(ans>=1e7)
+	   // return -1;
 	   
-	   
-	    return ans;
+	   // return ans;
+	    
+	    return fun1(nums,amount);
 	}
 };
 
