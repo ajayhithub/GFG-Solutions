@@ -21,11 +21,34 @@ class Solution
         dp[n] = max(l,r);
         return max(l,r);
     }
+    
+     int fun1(int arr[], int n)
+    {
+        vector<int> dp(n+1,0);
+        dp[0] = arr[0];
+        for(int i=1;i<n;i++)
+        {
+        int l = max(arr[i],dp[i-1]);
+        
+        int r = -1e9;
+        if(i-2>=0)
+        r = arr[i] + dp[i-2];
+        
+        dp[i] = max(l,r);
+      //  cout<<r<<endl;
+        }
+        
+        return dp[n-1];
+    }
+    
     int FindMaxSum(int arr[], int n)
     {
         // Your code here
-        vector<int> dp(n+1,-1);
-       return fun(arr,n-1,dp);  
+    //   vector<int> dp(n+1,-1);
+    //   return fun(arr,n-1,dp);
+       
+       return fun1(arr,n);
+       
         
     }
 };
