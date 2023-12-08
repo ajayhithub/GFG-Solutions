@@ -15,8 +15,6 @@ class Solution{
         
         if(i>j)
         return 0;
-        if(i==j)
-        return 1;
         if(dp[i][j]!=-1)
         return dp[i][j];
     
