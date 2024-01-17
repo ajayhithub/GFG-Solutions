@@ -13,28 +13,33 @@ public:
 	{
 	    // Your code goes here
 	    sort(arr,arr+n);
+	    
 	    int ans = 0;
 	    for(int i=n-1;i>=0;i--)
 	    {
 	        int j=i-1;
-	        int k = 0;
+	        int k=0;
 	        while(k<j)
 	        {
-	           if(arr[j]+arr[k]<arr[i])
-	            k++;
-	           else if(arr[j]+arr[k]>arr[i])
-	            j--;
-	            else
+	            if(arr[j]+arr[k]==arr[i])
 	            {
 	                ans++;
 	                j--;
 	                k++;
 	            }
+	            else if(arr[j]+arr[k]>arr[i])
+	            {
+	               j--;
+	            }
+	            else if(arr[j]+arr[k]<arr[i])
+	            {
+	               k++; 
+	            }
 	        }
 	    }
 	    
-	    
 	    return ans;
+	    
 	}
 };
 
