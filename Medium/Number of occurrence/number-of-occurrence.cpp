@@ -12,41 +12,15 @@ public:
 		of occurrences of x, otherwise returns 0. */
 	int count(int arr[], int n, int x) {
 	    // code here
-	    if(arr[n-1]<x)
-	    return 0;
-	    else if(arr[0]>x)
-	    return 0;
 	    
-	    int l  =0;
-	    int r = n-1;
-	    int mid  = (l+r)/2;
-	    while(l<=r)
-	    {
-	         mid  = (l+r)/2;
-	        if(arr[mid]==x && arr[mid-1]<x)
-	        {
-	          break;  
-	        }
-	        else if(arr[mid]<x)
-	        {
-	            l = mid + 1;
-	        }
-	        else if(arr[mid]==x || arr[mid]>x)
-	        r = mid-1;
-	        
-	    }
-	    
-	    
-	    int ans =  0;
-	    for(int i = mid; i<n;i++)
-	    {
-	        if(arr[i] != x)
-	        break;
-	        
-	        ans++;
-	    }
-	    
-	    return ans;
+	  auto  low1 = lower_bound(arr, arr+n, x); 
+	  auto  low2 = upper_bound(arr, arr+n, x);
+	  
+// 	  if(low2 != x)
+// 	  return low2-low1-1;
+// 	  else
+	  return low2-low1;
+	  
 	}
 };
 
