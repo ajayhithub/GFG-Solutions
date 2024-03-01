@@ -13,41 +13,45 @@ class Solution
     {
         // Your code here
         int n = str1.length();
-        if(n==1 && str1==str2)
-        return true;
-        else if(n==1 && str1!=str2)
+        int m = str2.length();
+        if(n==2 || n==1 || n!=m)
         return false;
-        
-        string ss = str1;
-        char a = str1[0];
-        char b = str1[1];
-        
-        for(int i=2;i<n;i++)
-        {
-            str1[i-2] = str1[i];
-        }
-        str1[n-2] = a;
-        str1[n-1] = b;
-        
-        if(str1==str2)
-        return true;
-        
-        char aa = ss[n-1];
-        char bb = ss[n-2];
-        for(int i=n-3;i>=0;i--)
-        {
-            ss[i+2] = ss[i];
-        }
-        ss[0] = bb;
-        ss[1] = aa;
-        
+
+       int j = 0;
+       
+       int t = 0;
+      for(int i=2;i<n;i++)
+      {
+         if(str1[i]!=str2[j])
+         {
+             t = 1;
+             break;
+         }
+         
+         j++;
+      }
+      if(t==0)
+      return true;
+      
      
-        if(ss==str2)
-        return true;
-        else
-        return false;
-        
-        
+      
+      
+      j = 0;
+      int tt = 0;
+       for(int i=2;i<m;i++)
+      {
+         if(str1[j]!=str2[i])
+         {
+            return false;
+         }
+         
+         
+         j++;
+      }
+      
+      
+      return true;
+  
     }
 
 };
