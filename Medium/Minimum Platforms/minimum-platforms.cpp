@@ -16,23 +16,22 @@ class Solution{
     	sort(arr,arr+n);
     	sort(dep,dep+n);
     	
+    	int l=0;
+    	int r=0;
     	int ans = 0;
     	int cnt = 0;
-    	int i = 0;
-    	int j = 0;
-    	while(i<n && j<n)
+    	while(l<n && r<n)
     	{
-    	    if(arr[i]<=dep[j])
+    	    if(arr[l]<=dep[r])
     	    {
-    	        cnt++;
-    	        ans = max(ans,cnt);
-    	        i++;
+    	       cnt++;
+    	       ans = max(ans,cnt);
+    	       l++;
     	    }
-    	    else if(arr[i]>dep[j])
+    	    else
     	    {
     	        cnt--;
-    	        ans = max(ans,cnt);
-    	        j++;
+    	        r++;
     	    }
     	}
     	
