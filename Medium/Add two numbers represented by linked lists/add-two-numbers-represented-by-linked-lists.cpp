@@ -64,98 +64,76 @@ class Solution
     struct Node* addTwoLists(struct Node* first, struct Node* second)
     {    
         // code here
-        string a = "";
-        string b = "";
-         while(first!=NULL)
-         {
-             a += first->data+'0';
-             first = first->next;
-         }
-         
-         while(second!=NULL)
-         {
-             b += second->data+'0';
-             second = second->next;
-         }
+        struct Node* a = first;
+        struct Node* b = second;
+        
+        struct Node* pre = NULL;
+        while(a!=NULL)
+        {
+            struct Node* aa = a;
+            a = a->next;
+            aa->next = pre;
+            pre = aa;
+        }
+        a = pre;
+      
+        struct Node* pre1 = NULL;
+        while(b!=NULL)
+        {
+            struct Node* aa = b;
+            b = b->next;
+            aa->next = pre1;
+            pre1 = aa;
+        }
+        b = pre1;
+       
+        int car = 0;
+        struct Node* ans = NULL;
+        while(a!=NULL && b!=NULL)
+        {
+          int num = a->data + b->data+car;        
+          struct Node* node = new Node(num%10);
+          car = num/10;
           
-     
-         Node* pre = NULL;
-         int car = 0;
-         int aa = a.length()-1;
-         int bb = b.length()-1;
-         while(aa>=0 && bb>=0)
-         {
-            if((a[aa]+b[bb]-'0'-'0'+car)<=9)
-            {
-            Node* node = new Node(a[aa]+b[bb]-'0'-'0'+car);
-            node->next = pre;
-            pre = node;
-            aa--;
-            bb--;
-            car = 0;
-            }
-            else
-            {
-            Node* node = new Node((a[aa]+b[bb]-'0'-'0'+car)%10);
-            node->next = pre;
-            pre = node;
-            car = (a[aa]+b[bb]-'0'-'0'+car)/10;
-            aa--;
-            bb--;
-            }
-         }
-         
-        //  cout<<car<<endl;
-         while(aa>=0)
-         {
-            if((a[aa]-'0'+car)<=9)
-            {
-            Node* node = new Node(a[aa]-'0'+car);
-            node->next = pre;
-            pre = node;
-            aa--;
-            car = 0;
-            }
-            else
-            {
-            Node* node = new Node((a[aa]-'0'+car)%10);
-            node->next = pre;
-            pre = node;
-            car = (a[aa]-'0'+car)/10;
-            aa--;
-            }
-         }
-         
-         while(bb>=0)
-         {
-            if((b[bb]-'0'+car)<=9)
-            {
-            Node* node = new Node(b[bb]-'0'+car);
-            node->next = pre;
-            pre = node;
-            bb--;
-            car = 0;
-            }
-            else
-            {
-            Node* node = new Node((b[bb]-'0'+car)%10);
-            node->next = pre;
-            pre = node;
-            car = (b[bb]-'0'+car)/10;
-            bb--;
-            }
-         }
-         
-     //    cout<<car<<endl;
-         if(car!=0)
-         {
-            Node* node = new Node(car);
-            node->next = pre;
-            pre = node; 
-         }
-         
-         return pre;
-         
+          node->next = ans;
+          ans = node;
+          
+          a = a->next;
+          b = b->next;
+        }
+      
+        while(a!=NULL)
+        {
+          int num = a->data + car;        
+          struct Node* node = new Node(num%10);
+          car = num/10;
+          
+          node->next = ans;
+          ans = node;
+          
+          a = a->next;
+        }
+    
+          while(b!=NULL)
+        {
+          int num = b->data + car;        
+          struct Node* node = new Node(num%10);
+          car = num/10;
+          
+          node->next = ans;
+          ans = node;
+          
+          b = b->next;
+        }
+        
+        if(car!=0)
+        {
+           struct Node* node = new Node(car); 
+           node->next = ans;
+           ans = node;
+        }
+        
+        return ans;
     }    
 };
 
