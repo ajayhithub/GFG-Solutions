@@ -35,25 +35,32 @@ class Solution{
     bool isPalindrome(Node *head)
     {
         //Your code here
-        string s = "";
-        while(head!=NULL)
-        {
-            s += head->data;
-            head = head->next;
-        }
         
-        int i = 0;
-        int j = s.length()-1;
-        while(i<j)
+        
+        Node *cur = head;
+        
+        Node* pre = NULL;
+        while(cur!=NULL)
         {
-            if(s[i]!=s[j])
-            return false;
-            
-            i++;
-            j--;
+          Node * node = new Node(cur->data);
+          node->next = pre;
+          
+          pre = node;
+          cur = cur->next;
+        }
+    
+         cur = head;
+        while(cur!=NULL &&  pre!=NULL)
+        {
+         if(cur->data != pre->data)
+         return false;
+         
+          cur = cur->next;
+          pre = pre->next;
         }
         
         return true;
+        
     }
 };
 
