@@ -100,9 +100,9 @@ class Solution{
     public:
     //Function to find the height of a binary tree.
     
-    int fun(struct Node* node)
+    int fun(Node* node)
     {
-        if(node == NULL)
+        if(node==NULL)
         return 0;
         
         int l = fun(node->left);
@@ -115,6 +115,8 @@ class Solution{
         // code here 
         
         return fun(node);
+        
+        
     }
 };
 
