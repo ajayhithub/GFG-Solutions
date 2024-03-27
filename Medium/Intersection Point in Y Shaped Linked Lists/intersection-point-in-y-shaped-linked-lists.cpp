@@ -116,30 +116,25 @@ struct Node {
 int intersectPoint(Node* head1, Node* head2)
 {
     // Your Code Here
-    Node* tt = head1;
-     int cnt = 0;
-     while(head1!=NULL)
-     {
-         cnt++;
-         head1 = head1->next;
-     }
-     
-     
-    unordered_map<Node*,int> mpp(cnt+1);
-     while(tt!=NULL)
-     {
-         mpp[tt] = 2;
-         tt = tt->next;
-     }
+    
+    unordered_map<Node*,int> mpp;
+    
+    while(head1!=NULL)
+    {
+        mpp[head1] = 2;
+        head1 = head1->next;
+        
+    }
+    
      while(head2!=NULL)
-     {
-         if(mpp[head2]==2)
-         return head2->data;
-         
-         head2 = head2->next;
-     }
-     
-     return -1;
-     
+    {
+        if(mpp[head2]==2)
+        return head2->data;
+        
+        head2 = head2->next;
+    }
+    
+    return -1;
+    
 }
 
